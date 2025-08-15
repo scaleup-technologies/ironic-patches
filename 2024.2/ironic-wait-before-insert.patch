@@ -1,0 +1,18 @@
+--- /var/lib/kolla/venv/lib/python3.11/site-packages/ironic/drivers/modules/redfish/boot.py	2025-08-15 11:00:53
++++ /var/lib/kolla/venv/lib/python3.11/site-packages/ironic/drivers/modules/redfish/boot.py	2025-08-15 11:00:29
+@@ -16,6 +16,7 @@
+ from oslo_log import log
+ import sushy
+ import tenacity
++import time
+ 
+ from ironic.common import boot_devices
+ from ironic.common import exception
+@@ -476,6 +477,7 @@
+         :raises: InvalidParameterValue, if no suitable virtual CD or DVD is
+             found on the node.
+         """
++    time.sleep(30)
+     system = redfish_utils.get_system(task.node)
+     _insert_vmedia(task, system.managers, image_url, device_type)
+ 
