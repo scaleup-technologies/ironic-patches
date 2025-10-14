@@ -8,7 +8,7 @@ ironic-fix-2095486.patch        ironic-nfs.patch                ironic-wait-befo
 Add support for nfs:// scheme on Redfish virtual media boot
 
 ### ironic-wait-before-insert.patch
-Wait 30 seconds before inserting virtual media
+Check if the virtual media is properly mounted (redfish). Retry on fail.
 
 ### ironic-fix-2095486.patch
 Do not store `upper_bound` BIOS attributes, fix for https://bugs.launchpad.net/ironic/+bug/2095486
