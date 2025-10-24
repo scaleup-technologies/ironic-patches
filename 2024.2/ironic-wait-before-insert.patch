@@ -28,13 +28,16 @@ index de1142b4c..e8055d3b1 100644
 -def _test_retry(exception):
 -    if isinstance(exception, sushy.exceptions.ServerSideError):
 +def _test_retry(_exception):
-+    if isinstance(_exception, (sushy.exceptions.ServerSideError, exception.VirtualMediaNotMountedError)):
++    if isinstance(_exception, sushy.exceptions.ServerSideError):
          # On some Dell hw, the eject media may still be in progress
          # https://storyboard.openstack.org/#!/story/2008504
          LOG.warning("Boot media insert failed for node %(node)s, "
                      "will retry after 3 seconds",
 -                    {'node': exception.node_uuid})
 +                    {'node': _exception.node_uuid})
++        return True
++    if isinstance(_exception, exception.VirtualMediaNotMountedError):
++        LOG.warning("Boot media was not inserted. Will retry after 3 seconds")
          return True
      return False
  
